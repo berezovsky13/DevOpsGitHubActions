@@ -16,5 +16,7 @@ jobs: # This is must
         run: echo "Shalom"
       - name: Docker Version
         run: docker -v
+      - name: Docker Build
+        run: docker build -t python:1.0 . 
 
     
