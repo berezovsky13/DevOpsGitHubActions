@@ -15,6 +15,6 @@ jobs: # This is must
       - name: Print Hello
         run: echo "Shalom"
       - name: Ping Google
-        run: ping -c 4 google.com
+        run: ping google.com
 
     
