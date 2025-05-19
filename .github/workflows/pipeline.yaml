@@ -1,18 +1,12 @@
-name: Scheduled Workflow
+name: My First Action
 
-on:
-  schedule:
-    - cron: '*/1 * * * *'  # Every minute (UTC)
-  workflow_dispatch:       # (Optional) Allows manual trigger via GitHub UI
+on: push  # Runs when code is pushed
 
 jobs:
-  cron-job:
+  my-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Print a Timestamp
-        run: |
-          echo "The current UTC time is:"
-          date -u
-
-      - name: Friendly Message
-        run: echo "This pipeline ran automatically using cron!"
+      - name: Checkout code
+        uses: actions/checkout@v4  # It just does git clone but for the repo that you are currently using
+      - name: Print Hello World
+        run: echo "Hello, GitHub Actions!"
