@@ -9,10 +9,12 @@ jobs: # This is must
   simple-job: # The name of the job
     runs-on: ubuntu-latest
 
-    
-      name: Checkout Repository
+    steps:
+      - name: Checkout Repository
         uses: actions/checkout@v3
-      -name: Print Hello
-        run: echo "Shalom World"
+      - name: Print Hello
+        run: echo "Shalom"
+      - name: Ping Google
+        run: ping -c 4 google.com
 
     
