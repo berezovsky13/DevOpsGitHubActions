@@ -2,14 +2,17 @@ name: Scheduled Workflow
 
 on:
   schedule:
-    - cron: '*/1 * * * *'  # Run every minute
+    - cron: '*/1 * * * *'  # Every minute (UTC)
+  workflow_dispatch:       # (Optional) Allows manual trigger via GitHub UI
 
 jobs:
   cron-job:
     runs-on: ubuntu-latest
     steps:
       - name: Print a Timestamp
-        run: echo "The current UTC time is: $(date -u)"
+        run: |
+          echo "The current UTC time is:"
+          date -u
 
       - name: Friendly Message
         run: echo "This pipeline ran automatically using cron!"
