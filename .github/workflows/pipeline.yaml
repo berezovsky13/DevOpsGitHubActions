@@ -2,11 +2,21 @@ name: Test GitHub Actions
 
 on: [push]
 
+# step 1 - Code Checkout
+# step 2 - Login to DockerHub
+# step 3 - Docker Build
+# step 4 - Docker Push
+
 jobs:
-  build:
+  docker-pipeline:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Code
+      - name: Code Checkout
         uses: actions/checkout@v3
-      - name: Say Hello
-        run: echo "Hi"
+
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          username: ${{secrets.DOCKER_USERNAME}}
+          password: ${{secrets.DOCKER_PASSWORD}}
