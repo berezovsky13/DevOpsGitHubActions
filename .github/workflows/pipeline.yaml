@@ -1,28 +1,23 @@
-name: Test GitHub Actions
+name: AWS Basic Setup
 
-on: [push]
-
-# step 1 - Code Checkout
-# step 2 - Login to DockerHub
-# step 3 - Docker Build
-# step 4 - Docker Push
+on:
+  workflow_dispatch:   # run manually
+  push:
+    branches: [ main ] # or any branch you want
 
 jobs:
-  docker-pipeline:
+  setup-aws:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Code Checkout
-        uses: actions/checkout@v3
+      # 1) Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Docker Login
-        uses: docker/login-action@v3
+      # 2) Configure AWS CLI
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          username: ${{secrets.DOCKER_USERNAME}}
-          password: ${{secrets.DOCKER_PASSWORD}}
-
-      - name: Docker Build
-        run: docker build -t ${{secrets.DOCKER_USERNAME}}/ga-january-test:latest .
-
-      - name: Docker Push
-        run: docker push ${{secrets.DOCKER_USERNAME}}/ga-january-test:latest
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
